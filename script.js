@@ -31,8 +31,17 @@ function getComputerChoice(rock, paper, scissors) {
 
 
 function getHumanChoice() {
-    let userChoice = prompt("Choose your game. Rock, paper or scissors?");
-    return userChoice.toLowerCase();
+    let userChoice;
+    while (true) {
+        userChoice = prompt("Choose your game. Rock, Paper or Scissors?");
+        if (userChoice.toLowerCase() === "rock" ||
+            userChoice.toLowerCase() === "paper" ||
+            userChoice.toLowerCase() === "scissors") {
+            return userChoice.toLowerCase();
+        }   else {
+            alert("Invalid choice. Please choose Rock, Paper or Scissors.")
+        }
+    }
 }
 
 
@@ -41,9 +50,6 @@ function playGame() {
     let computerScore = 0;
 
     function playRound(humanChoice, computerChoice) {
-        if (humanChoice === "rock" || humanChoice === "paper" || humanChoice === "scissors") {
-            console.log("You choose: " + humanChoice);
-        }
         if (computerChoice === humanChoice) {
             console.log("It's a tie!");
         }   else if (
@@ -62,6 +68,7 @@ function playGame() {
     // Round 1
     console.log("Round 1!");
     let humanSelection1 = getHumanChoice();
+    console.log("You choose: " + humanSelection1);
     let computerSelection1 = getComputerChoice("rock", "paper", "scissors");
     console.log("Computer chose: " + computerSelection1);
     playRound(humanSelection1, computerSelection1);
@@ -71,6 +78,7 @@ function playGame() {
     // Round 2
     console.log("Round 2!");
     let humanSelection2 = getHumanChoice();
+    console.log("You choose: " + humanSelection2);
     let computerSelection2 = getComputerChoice("rock", "paper", "scissors");
     console.log("Computer chose: " + computerSelection2);
     playRound(humanSelection2, computerSelection2);
@@ -80,6 +88,7 @@ function playGame() {
     // Round 3
     console.log("Round 3!");
     let humanSelection3 = getHumanChoice();
+    console.log("You choose: " + humanSelection3);
     let computerSelection3 = getComputerChoice("rock", "paper", "scissors");
     console.log("Computer chose: " + computerSelection3);
     playRound(humanSelection3, computerSelection3);
@@ -89,6 +98,7 @@ function playGame() {
     // Round 4
     console.log("Round 4!");
     let humanSelection4 = getHumanChoice();
+    console.log("You choose: " + humanSelection4);
     let computerSelection4 = getComputerChoice("rock", "paper", "scissors");
     console.log("Computer chose: " + computerSelection4);
     playRound(humanSelection4, computerSelection4);
@@ -98,6 +108,7 @@ function playGame() {
     // Round 5
     console.log("Round 5!");
     let humanSelection5 = getHumanChoice();
+    console.log("You choose: " + humanSelection5);
     let computerSelection5 = getComputerChoice("rock", "paper", "scissors");
     console.log("Computer chose: " + computerSelection5);
     playRound(humanSelection5, computerSelection5);
