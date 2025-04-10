@@ -92,7 +92,8 @@ function playGame() {
                 alert(finalResultMessage);
                 console.log(finalResultMessage);
             }
-            divFinalResults = document.querySelector("#finalResults");
+            
+            let divFinalResults = document.querySelector("#finalResults");
             divFinalResults.textContent = finalResultMessage;
 
             // Reset scores for a new game.
