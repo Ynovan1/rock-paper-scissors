@@ -1,23 +1,3 @@
-/*
-function getComputerChoice() {
-    let getRandomObject = Math.floor(Math.random() * 3);
-    if (getRandomObject === 0) {
-    return "rock";
-    }   else if (getRandomObject === 1) {
-        return "paper";
-    }   else {
-        return "scissors";
-    }
-}
-
-let computerGame = getComputerChoice();
-console.log(computerGame);
-*/
-
-
-
-// if-else method with parameters in the function.
-
 function getComputerChoice(rock, paper, scissors) {
     let getRandomObject = Math.floor(Math.random() * 3);
     if (getRandomObject === 0) {
@@ -30,120 +10,98 @@ function getComputerChoice(rock, paper, scissors) {
 }
 
 
-function getHumanChoice() {
-    let userChoice;
-    while (true) {
-        userChoice = prompt("Choose your game. Rock, Paper or Scissors?");
-        if (userChoice.toLowerCase() === "rock" ||
-            userChoice.toLowerCase() === "paper" ||
-            userChoice.toLowerCase() === "scissors") {
-            return userChoice.toLowerCase();
-        }   else {
-            alert("Invalid choice. Please choose Rock, Paper or Scissors.")
-        }
-    }
-}
-
-
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
+    let roundCount = 0;
 
     function playRound(humanChoice, computerChoice) {
+        let divYourResult = document.querySelector("#yourResult");
+        divYourResult.textContent = `Your score: ${humanScore}`;
+        
+        let divComputerResult = document.querySelector("#computerResult");
+        divComputerResult.textContent = `Computer score: ${computerScore}`;
+        
+        let gameResultMessage;
         if (computerChoice === humanChoice) {
-            console.log("It's a tie!");
+            gameResultMessage = "It's a tie!";
+            alert(gameResultMessage);
+            console.log(gameResultMessage);
         }   else if (
             (humanChoice === "rock" && computerChoice === "scissors") ||
             (humanChoice === "paper" && computerChoice === "rock") ||
             (humanChoice === "scissors" && computerChoice === "paper")
-        )   {
+        )   {            
             humanScore++;
-            console.log("You win!");
+            gameResultMessage = "You win!";
+            alert(gameResultMessage);
+            console.log(gameResultMessage);
         }   else {
             computerScore++;
-            console.log("Computer wins!");
+            gameResultMessage = "Computer wins!";
+            alert(gameResultMessage);
+            console.log(gameResultMessage);
         }
+        
+        let divGameResult = document.querySelector("#gameResult");
+        divGameResult.textContent = gameResultMessage;
     }
 
-    // Round 1
-    console.log("Round 1!");
-    let humanSelection1 = getHumanChoice();
-    console.log("You choose: " + humanSelection1);
-    let computerSelection1 = getComputerChoice("rock", "paper", "scissors");
-    console.log("Computer chose: " + computerSelection1);
-    playRound(humanSelection1, computerSelection1);
-    console.log("Your score: " + humanScore);
-    console.log("Computer score: " + computerScore);
+    let buttons = document.querySelector("#buttons");
+    buttons.addEventListener("click", (event) => {
+        let target = event.target;
+        let humanSelection = target.id;
+        if (humanSelection === "rock" || 
+            humanSelection === "paper" || 
+            humanSelection === "scissors") {
+                let computerSelection = getComputerChoice("rock", "paper", "scissors");
 
-    // Round 2
-    console.log("Round 2!");
-    let humanSelection2 = getHumanChoice();
-    console.log("You choose: " + humanSelection2);
-    let computerSelection2 = getComputerChoice("rock", "paper", "scissors");
-    console.log("Computer chose: " + computerSelection2);
-    playRound(humanSelection2, computerSelection2);
-    console.log("Your score: " + humanScore);
-    console.log("Computer score: " + computerScore);
+                roundCount++
+                let divRound = document.querySelector("#roundCount");
+                divRound.textContent = `Round ${roundCount}!`;
+                // alert("Round " + roundCount + "!");
+                console.log("Round " + roundCount + "!");
 
-    // Round 3
-    console.log("Round 3!");
-    let humanSelection3 = getHumanChoice();
-    console.log("You choose: " + humanSelection3);
-    let computerSelection3 = getComputerChoice("rock", "paper", "scissors");
-    console.log("Computer chose: " + computerSelection3);
-    playRound(humanSelection3, computerSelection3);
-    console.log("Your score: " + humanScore);
-    console.log("Computer score: " + computerScore);
+                let divHumanChoice = document.querySelector("#yourChoice");
+                divHumanChoice.textContent = `You choose ${humanSelection}!`
+                // alert("You choose " + humanSelection + "!");
+                console.log("You choose " + humanSelection + "!");
 
-    // Round 4
-    console.log("Round 4!");
-    let humanSelection4 = getHumanChoice();
-    console.log("You choose: " + humanSelection4);
-    let computerSelection4 = getComputerChoice("rock", "paper", "scissors");
-    console.log("Computer chose: " + computerSelection4);
-    playRound(humanSelection4, computerSelection4);
-    console.log("Your score: " + humanScore);
-    console.log("Computer score: " + computerScore);
+                let divComputerChoice = document.querySelector("#computerChoice");
+                divComputerChoice.textContent = `Computer chose ${computerSelection}!`;
+                alert("Computer chose " + computerSelection + "!");
+                console.log("Computer chose " + computerSelection + "!")
 
-    // Round 5
-    console.log("Round 5!");
-    let humanSelection5 = getHumanChoice();
-    console.log("You choose: " + humanSelection5);
-    let computerSelection5 = getComputerChoice("rock", "paper", "scissors");
-    console.log("Computer chose: " + computerSelection5);
-    playRound(humanSelection5, computerSelection5);
-    console.log("Your score: " + humanScore);
-    console.log("Computer score: " + computerScore);
+                playRound(humanSelection, computerSelection);
+                console.log("Your score: " + humanScore);
+                console.log("Computer score: " + computerScore);
+            }
+    
+        if (roundCount === 5) {
+            let finalResultMessage;
+            if (humanScore > computerScore) {
+                finalResultMessage = "You win! Yay!";
+                alert(finalResultMessage);
+                console.log(finalResultMessage);
+            } else if (humanScore < computerScore) {
+                finalResultMessage = "You lose! Boohoo!";
+                alert(finalResultMessage);
+                console.log(finalResultMessage);
+            } else {
+                finalResultMessage = "It's a tie game!";
+                alert(finalResultMessage);
+                console.log(finalResultMessage);
+            }
+            divFinalResults = document.querySelector("#finalResults");
+            divFinalResults.textContent = finalResultMessage;
 
-    if (humanScore > computerScore) {
-        console.log("You win! Yay!")
-    }   else if (humanScore < computerScore) {
-        console.log("You lose! Bohoo!")
-    }   else {
-        console.log("It's a tie game!")
-    }
+            // Reset scores for a new game.
+            humanScore = 0;
+            computerScore = 0;
+            roundCount = 0;
+        }
+    });
 }
+
 
 playGame();
-
-
-// switch method.
-/*
-function getComputerChoice(rock, paper, scissors) {
-    let getRandomObject = Math.floor(Math.random() * 3);
-    switch (getRandomObject) {
-        case 0:
-            return rock;
-        case 1:
-            return paper;
-        case 2:
-            return scissors;
-        // This should not happen, but it is good to have a predetermined case:
-        default:
-            return null;
-    }
-}
-
-let computerGame = getComputerChoice("rock", "paper", "scissors");
-console.log(computerGame);
-*/
